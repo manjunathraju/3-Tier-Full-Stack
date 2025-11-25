@@ -24,3 +24,15 @@ jobs:
         cache: 'npm'
     - run: npm install
  
+  Gitleaks:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+
+      - name: Gitleaks scan
+        run: |
+          gitleaks detect --source .
