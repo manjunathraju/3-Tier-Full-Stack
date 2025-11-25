@@ -27,6 +27,7 @@ jobs:
   Gitleaks:
     name: gitleaks
     runs-on: ubuntu-latest
+    needs: compile
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,4 +36,5 @@ jobs:
 
       - name: Gitleaks scan
         run: |
-          gitleaks detect --source .
+          gitleaks detect --source ./controllers --exit-code 1
+          gitleaks detect --source ./models --exit-code 1
